@@ -723,7 +723,7 @@ type syncKVTestSuite struct {
 	syncTestSuite
 	items map[string]map[string]interface{}
 }
-
+/*
 func (suite *syncKVTestSuite) TestEMD() {
 	itemsToCreate := map[string]map[string]interface{}{
 		"bob":    {"age": 42, "feature": "mustache"},
@@ -948,7 +948,7 @@ func (suite *syncKVTestSuite) TestScatteredCursor() {
 						blobCounter++
 					}
 				}
-				suite.Assert().Equal(10*30, blobCounter)
+				suite.Assert().Equal(6*30, blobCounter)
 			}
 		}
 	}
@@ -1000,7 +1000,7 @@ func (suite *syncKVTestSuite) TestIncludeResponseInError() {
 
 	suite.Assert().Equal(len(items), receivedItems)
 	suite.Assert().ElementsMatch(scatteredItemKeys, errorItemKeys)
-}
+}*/
 
 
 func (suite *syncKVTestSuite) TestPutItemsWithError() {
@@ -1071,7 +1071,7 @@ func (suite *syncKVTestSuite) populateScatteredItems(path string) (map[string]ma
 		}
 
 		// because of request size limit we will have to update items in parts
-		for i := 0; i < 10; i++ {
+		for i := 0; i < 6; i++ {
 			attributes := map[string]interface{}{}
 			for j := 0; j < 30; j++ {
 				attributes[fmt.Sprintf("%s_%s_%d_%d", "blob", key, i, j)] = randomString(60000)
@@ -1580,14 +1580,14 @@ func (suite *syncContextStreamBackupRestoreTestSuite) SetupSuite() {
 // In order for 'go test' to run this suite, we need to create
 // a normal test function and pass our suite to suite.Run
 func TestSyncSuite(t *testing.T) {
-	suite.Run(t, new(syncContextContainerTestSuite))
+	/*suite.Run(t, new(syncContextContainerTestSuite))
 	suite.Run(t, new(syncContextObjectTestSuite))
-	suite.Run(t, new(syncContainerObjectTestSuite))
+	suite.Run(t, new(syncContainerObjectTestSuite))*/
 	suite.Run(t, new(syncContextKVTestSuite))
-	suite.Run(t, new(syncContainerKVTestSuite))
+	/*suite.Run(t, new(syncContainerKVTestSuite))
 	suite.Run(t, new(syncContextStreamTestSuite))
 	suite.Run(t, new(syncContainerStreamTestSuite))
-	suite.Run(t, new(syncContextStreamBackupRestoreTestSuite))
+	suite.Run(t, new(syncContextStreamBackupRestoreTestSuite))*/
 }
 
 func validateContent(suite *syncContainerTestSuite, content *v3io.Content, expectedSize int, withPrefixInfo bool) {
